@@ -26,7 +26,7 @@ export class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
-
+  
   formSubmit = (data) => {
     const { contacts } = this.state;
     if (contacts.some(contact => contact.name === data.name)) {
@@ -48,7 +48,7 @@ export class App extends Component {
     this.setState({ [name]: value });
   }
 
-  onFilteredContacts = () => {
+  onFiltredСontacts = () => {
     const { filter, contacts } = this.state;
     return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
   }
@@ -64,7 +64,7 @@ export class App extends Component {
         <ContactForm onSubmit={this.formSubmit} />
         <h2 className={css.title}>Contacts</h2>
         <Filter value={this.state.filter} handleChange={this.changeFilter}/>
-        <ContactList onFilteredContacts={this.onFilteredContacts()} deleteContact={this.deleteContact}/>
+        <ContactList filtredСontacts={this.onFiltredСontacts()} deleteContact={this.deleteContact}/>
       </div>
 
     )
