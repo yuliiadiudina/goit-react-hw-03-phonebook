@@ -45,7 +45,9 @@ export class App extends Component {
 
   changeFilter = event => {
     const { name, value } = event.currentTarget;
-    this.setState({ [name]: value });
+    if (name && value) {
+      this.setState({ [name]: value });
+    }
   }
 
   onFiltredСontacts = () => {
