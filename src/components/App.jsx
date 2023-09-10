@@ -29,18 +29,36 @@ export class App extends Component {
   
   formSubmit = (data) => {
     const { contacts } = this.state;
-    if (contacts.some(contact => contact.name === data.name)) {
-      alert(`${data.name} is already in contacts.`);
-      return;
+  
+    if (!contacts || typeof contacts === 'undefined') {
+      
+      this.setState({
+        contacts: [
+          {
+            id: nanoid(),
+            name: data.name,
+            number: data.number
+          }
+        ]
+      });
+    } else {
+      
+      if (contacts.some(contact => contact.name === data.name)) {
+        alert(`${data.name} is already in contacts.`);
+        return;
+      }
+  
+      this.setState({
+        contacts: [
+          ...contacts,
+          {
+            id: nanoid(),
+            name: data.name,
+            number: data.number
+          }
+        ]
+      });
     }
-    this.setState({
-      contacts: [  ...contacts,
-        { 
-          id: nanoid(),
-          name: data.name,
-          number: data.number
-        }
-      ]});
   }
 
   changeFilter = event => {
@@ -50,8 +68,13 @@ export class App extends Component {
     }
   }
 
-  onFiltredСontacts = () => {
+  onFilteredContacts = () => {
     const { filter, contacts } = this.state;
+  
+    if (!contacts || typeof filter === 'undefined') {
+      return [];
+    }
+  
     return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
   }
 
@@ -66,7 +89,7 @@ export class App extends Component {
         <ContactForm onSubmit={this.formSubmit} />
         <h2 className={css.title}>Contacts</h2>
         <Filter value={this.state.filter} handleChange={this.changeFilter}/>
-        <ContactList filtredСontacts={this.onFiltredСontacts()} deleteContact={this.deleteContact}/>
+        <ContactList filtredContacts={this.onFilteredContacts()} deleteContact={this.deleteContact}/>
       </div>
 
     )
