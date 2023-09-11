@@ -60,12 +60,17 @@ export class App extends Component {
       });
     }
   }
-
+/* 
   changeFilter = event => {
     const { name, value } = event.currentTarget;
     if (name && value) {
       this.setState({ [name]: value });
     }
+  } */
+
+  changeFilter = event => {
+    const { name, value } = event.currentTarget;
+    this.setState({ [name]: value });
   }
 
   onFilteredContacts = () => {
